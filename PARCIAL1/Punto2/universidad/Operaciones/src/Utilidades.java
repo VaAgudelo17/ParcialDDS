@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Utilidades {
@@ -73,6 +74,7 @@ public class Utilidades {
 
     public static void main(String[] args) {
         int[] numbers = {1, 9, 23, 4, 55, 100, 1, 1, 23};
+		System.out.println("---------------------------------------------");
         System.out.println("Antes del metodo de la burbuja: " + Arrays.toString(numbers));
         bubbleSort(numbers);
         System.out.println("Después del metodo de la burbuja: " + Arrays.toString(numbers));
@@ -81,27 +83,45 @@ public class Utilidades {
         System.out.println("Antes del metodo de la burbuja: " + Arrays.toString(names));
         bubbleSort(names);
         System.out.println("Despues del metodo de la burbuja: " + Arrays.toString(names));
-
+		System.out.println("---------------------------------------------");
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Ingrese la accion que quiere realizar:");
 
-        int action = scanner.nextInt();
-        switch (action) {
-            case 1:
-                System.out.println("Ingrese un numero para saber si es primo o no:");
-                int userNumber = scanner.nextInt();
-                System.out.println(isPrime(userNumber));
-                break;
-            case 2:
-                System.out.println("Ingrese los 4 numeros double de la operacion:");
-                double a = scanner.nextDouble();
-                double b = scanner.nextDouble();
-				double c = scanner.nextDouble();
-				double d = scanner.nextDouble();
-				System.out.println("el resultado es igual a: "+calculateResult(a, b, c, d));
-				break;
-			default:
-				System.out.println("Accion invalida.");
-		}
+        while (true) {
+            System.out.println("Ingrese la accion que quiere realizar:");
+            System.out.println("1. Verificar si un numero es primo.");
+            System.out.println("2. Calcular el resultado de una operacion.");
+            System.out.println("3. Salir.");
+
+            try {
+                int action = scanner.nextInt();
+
+                switch (action) {
+                    case 1:
+                        System.out.println("Ingrese un numero para saber si es primo o no:");
+                        int userNumber = scanner.nextInt();
+                        System.out.println(isPrime(userNumber));
+                        break;
+                    case 2:
+                        System.out.println("Ingrese los 4 numeros double de la operacion:");
+                        double a = scanner.nextDouble();
+                        double b = scanner.nextDouble();
+                        double c = scanner.nextDouble();
+                        double d = scanner.nextDouble();
+                        System.out.println("El resultado es igual a: " + calculateResult(a, b, c, d));
+                        break;
+                    case 3:
+                        System.out.println("Saliendo del programa...");
+                        return;
+                    default:
+                        System.out.println("Accion invalida");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Entrada invalida, por favor ingrese un numero");
+                scanner.next();
+            }
+        }
+
+ 
+		
 	}
 }
